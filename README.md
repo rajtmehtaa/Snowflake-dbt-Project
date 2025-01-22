@@ -111,26 +111,96 @@ To start using Snowflake, follow these steps:
   
 ## Project B: dbt and Dimensional Modeling in Snowflake
 
+---
+
 ### Objective:
 Leverage **dbt** to transform raw E-commerce data into dimensional models, data marts, and a unified **One Wide Table (OWT)** for advanced analytics.
 
+---
+
 ### Architecture:
 
-### 1. dbt-snowflake Architecture: 
-![Image](https://github.com/user-attachments/assets/2e9824bf-5ecd-4aee-a807-b24f93e0d1d2)
+#### 1. dbt-Snowflake Architecture:
+![dbt-Snowflake Architecture](https://github.com/user-attachments/assets/2e9824bf-5ecd-4aee-a807-b24f93e0d1d2)
 
-### 2. Tables:
-![Image](https://github.com/user-attachments/assets/97ce45ca-68f9-417d-9801-84c7d0a95f90)
+#### 2. Tables:
+![Tables Overview](https://github.com/user-attachments/assets/97ce45ca-68f9-417d-9801-84c7d0a95f90)
+
+---
 
 ### Workflow:
+
 1. **Data Ingestion**:
-   - Loaded raw data into Snowflake tables via **Snowflake stages**.
-2. **Data Transformation**:
-   - Built **dbt models** to clean and structure data.
-   - Created **dimensional tables** (e.g., invoices, items, countries).
-   - Generated an **OWT** for BI tools to access comprehensive insights.
-3. **RFM Analysis**:
-   - Conducted customer segmentation using **Recency, Frequency, and Monetary (RFM)** metrics.
-   - Identified high-value customers to enhance marketing strategies.
+   - Followed the Snowflake preparation steps to load the raw E-commerce data (CSV file) into **Snowflake Staging Tables**.
 
+2. **Data Transformation with dbt**:
+   - Configured and set up **dbt Core** to work with the Snowflake instance.
+   - Built **SQL models**, custom schemas, and Python models to transform the raw data into structured data.
+   - Worked with **dbt source files** and **seed files** to integrate auxiliary data like `countries.csv`.
 
+3. **Pushing to Snowflake**:
+   - Used **dbt CLI commands** to push transformations and models to Snowflake.
+   - Modified the `ecommerce_dbt` repository created using `dbt init` by adding:
+     - Models: For staging, marts, and OWT creation.
+     - Seeds: For auxiliary data ingestion (e.g., `countries.csv`).
+     - Targets: To specify the destination schema and database in Snowflake.
+   - Implemented and validated transformations with **generic tests** in dbt.
+
+4. **Dimensional Modeling**:
+   - Created dimensional tables for **invoices**, **items**, and **countries**.
+   - Designed a unified **One Wide Table (OWT)** to aggregate data marts for BI tools like Power BI.
+
+5. **RFM Analysis**:
+   - Performed **RFM Analysis** using dbt Python models to segment customers based on:
+     - **Recency**: Time since the last order.
+     - **Frequency**: Number of orders.
+     - **Monetary Value**: Total value of purchases.
+   - Example output:
+     ![Image](https://github.com/user-attachments/assets/6e96c312-9495-4ab9-8d09-ec2cb042f888)
+
+---
+
+### Key Deliverables:
+
+1. **SQL Models**:
+   - Designed robust SQL transformations for Snowflake tables.
+   - Ensured data consistency and accuracy with tests in dbt.
+
+2. **Custom Schemas and Seed Files**:
+   - Added `countries.csv` seed file to integrate country data and enrich dimensional models.
+
+3. **One Wide Table (OWT)**:
+   - Aggregated key insights from multiple tables into a single, query-ready structure for downstream analytics.
+
+4. **RFM Analysis**:
+   - Identified high-value customers through a detailed segmentation analysis.
+
+---
+
+### Setup:
+
+#### 1. Setting Up dbt Core:
+- Installed dbt Core locally and configured it to connect to Snowflake.
+- Initialized the project with:
+  ```bash
+  dbt init ecommerce_dbt
+- Updated `dbt_project.yml` file to specify the database, schema, and Snowflake profile.
+
+### 2. Adding Models and Seeds:
+- Added `countries.csv` to the 'model' folder as a seed file and updated the dimension scripts.
+  
+  ```bash
+  dbt seed
+- Created mart models and defined transformations for invoices, items, and the One Wide Table (OWT).
+
+### 3. Running dbt Commands: 
+- Executed transformation with:
+  ```bash
+  dbt run
+- Tested Models using:
+  ```bash
+  dbt test
+- Validated data with custom and generic tests in dbt.
+
+## Conclusion
+Together, these projects highlight expertise in end-to-end data engineering workflows, including data ingestion, transformation, and visualization. They also emphasize the integration of scalable tools like Snowflake and dbt to derive valuable business intelligence from raw datasets, bridging the gap between raw data and decision-making. These projects serve as a foundation for handling large-scale data engineering tasks in real-world scenarios.
